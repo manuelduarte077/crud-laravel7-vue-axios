@@ -24,6 +24,9 @@
     <link href="{{ asset('lib/toastr/toastr.scss') }}" rel="stylesheet"/>
     <script src="{{ asset('lib/toastr/toastr.js') }}"></script>
 
+    <!--sweetalert2  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
 
 </head>
