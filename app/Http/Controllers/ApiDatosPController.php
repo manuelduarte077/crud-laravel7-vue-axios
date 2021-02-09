@@ -14,7 +14,7 @@ class ApiDatosPController extends Controller
      */
     public function index()
     {
-        return DatosP::get();
+        return DatosP::orderBy('id', 'desc')->get();
     }
 
     /**
@@ -35,7 +35,15 @@ class ApiDatosPController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos = new DatosP;
+
+        $datos->name     = $request->name;
+        $datos->position = $request->position;
+        $datos->salary   = $request->salary;
+        $datos->save();
+
+        return 'Datos guardados correctamente';
+
     }
 
     /**
