@@ -138,7 +138,57 @@ var app = new Vue({
 
 
 
-        }
+        },
+
+
+        editarDato(dato) {
+          console.log(dato);
+
+          formulario = 
+          '<div id="swal2-content" class="swal2-html-container" style="display: block;">Nombre y apellido</div>'+
+          '<input id="name" name="name" class="swal2-input" placeholder="" type="text" style="display: flex;">'+
+
+          '<div id="swal2-content" class="swal2-html-container" style="display: block;">Posicion de este empleado</div>'+
+          '<select id="position" name="position" class="swal2-select" style="display: flex;"><option value="" disabled="">Selecciona una posicion</option><option value="Auditor">Auditor</option><option value="Soporte">Soporte</option><option value="Seguridad">Seguridad</option></select>'+
+
+          '<div id="swal2-content" class="swal2-html-container" style="display: block;">Salario</div>'+
+          '<input id="salary" name="salary" min="4" step="0.01" class="swal2-input" placeholder="" type="number" style="display: flex;">';
+
+
+           Swal.fire({
+              title: 'Editar registro',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              cancelButtonText: 'Cancelar!',
+              confirmButtonText: 'Guardar',
+              html: formulario,
+              focusConfirm: false,
+              preConfirm: async () => {
+
+                ultimosdatoseditados = {
+                  name:      document.getElementById('name').value,
+                  position:  document.getElementById('position').value, 
+                  salary:    document.getElementById('salary').value,            
+                };
+
+                let url = '/api/datosp/'+dato.id;
+                await axios.put(url, ultimosdatoseditados).then(response=>{
+                    console.log(response.data);
+                    this.mensaje=response.data;
+                });
+
+                this.getDatos();                  
+               
+              return toastr.success(this.mensaje);
+            }
+            })  
+
+            document.getElementById('name').value      = dato.name;
+            document.getElementById('position').value  = dato.position;
+            document.getElementById('salary').value    = dato.salary;
+
+          }
 
     },
 

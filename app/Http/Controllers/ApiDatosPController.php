@@ -75,9 +75,15 @@ class ApiDatosPController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, DatosP $datosp)
     {
-        //
+
+        $datosp->name     = $request->name;
+        $datosp->position = $request->position;
+        $datosp->salary   = $request->salary;
+        $datosp->save();
+
+        return 'Datos editados correctamente';
     }
 
     /**
